@@ -1,0 +1,51 @@
+version: '3'
+services:
+  db:
+    container_name: db
+    image: postgres
+    environment: 
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=awr
+    ports:
+      - "5432:5432"
+    volumes:
+      - awr-data:/var/lib/postgresql/data/
+    networks:
+      - freaky
+  api:
+    container_name: api
+    build: api/
+    ports:
+      - "8080:8080"
+    networks:
+      - freaky
+    depends_on:
+      - db
+    environment:
+      - NODE_ENV=development
+      - DB_CONNECTION_STRING=postgresql://postgres:docker@db:5432/awr
+    volumes:
+      - type: bind
+        source: ./api
+        target: /src/app
+  ui:
+    container_name: ui
+    build: ui/
+    ports:
+      - "3000:3000"
+    networks:
+      - freaky
+    depends_on:
+      - api
+    volumes:
+      - type: bind
+        source: ./ui
+        target: /app
+      
+networks:
+  freaky:
+    driver: bridge
+
+volumes:
+  awr-data: 

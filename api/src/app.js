@@ -10,17 +10,11 @@ const knex = require('knex')(require('../knexfile.js')[process.env.NODE_ENV || "
 app.use(cors())
 
 app.get('/', (req, res) => {
-    res.status(200).json('My API is up and running Yo!')
+    res.status(200).json('My API is up and running!')
 })
 
 app.get('/test', (req, res) => {
-    res.status(200).json("testing this shiiiii")
-})
-
-app.get('/crew', (req, res) => {
-    knex('best_crew_ever')
-        .select('*')
-        .then(data => res.status(200).json(data))
+    res.status(200).json("testing this endpoint")
 })
 
 

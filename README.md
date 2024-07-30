@@ -1,4 +1,4 @@
-# This is my Docker-compose template
+# This is my Docker-Compose template
 
 - Under docker-compose.yaml change my_database to the name of the database you want to create
     Line 9 - POSTGRES_DB=my_database
@@ -11,3 +11,6 @@
 
 - Knex, Cors and other dependecies are already written into the api folder.
     - If you want to run commands in the teminal you will have to run npm install within /api and /ui folder.
+
+
+-Please read each ReadMe under each endpoint for additional information.

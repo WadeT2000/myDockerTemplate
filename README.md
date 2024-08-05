@@ -64,6 +64,8 @@ api exited with code 1
 
 If you have an error in your terminal see below for fixes.
 
+Else move onto (The application should be up and running) below
+
 # Common Errors
 
 1. If you run into the issue of already having a container with this name follow directions below
@@ -109,11 +111,6 @@ If you have an error in your terminal see below for fixes.
                     + ` docker-compose down `
                     + ` docker-compose up --build `
             Everything should be up and running as intended.
-
-        
-
-
-
 
                     
 

@@ -26,15 +26,53 @@
     After running npm install for each endpoint, in the terminal CD back to mydockertemplate and do the following:
 
         1. ` docker-compose up --build `
-            
-    (If you run into the issue of already having a container with this name follow directions below)
-            # The container name "/db" is already in use by container "---------------------------------------". You have to remove (or rename) that container to be able to reuse that name.
 
-                - In the terminal press Lctrl+C
-                    - Paste 'docker container rm <Container Name> (Container Name should be the container that is being hosted on the same port)
-                    (This should resolve your container issues)
-                    OR
-                    - Navigate to docker-compose.yaml and change the container name on line 4
+# Common Errors
+
+If you run into the issue of already having a container with this name follow directions below
+            The container name "/db" is already in use by container "---------------------------------------". You have to remove (or rename) that container to be able to reuse that name.
+
+            - Navigate to docker-compose.yaml and change the container name on Line 4
+
+            OR
+
+            - In the terminal 
+                - Press Lctrl+C
+                + ` docker container rm <Container Name> ` (Container Name should be the container that is being hosted on the same port)
+                (This should resolve your container issues)
+
+ Database that you've created not actually being created? follow below instructions
+    There are two main ways to go about this fix actions
+        1. Manually create your database:
+        - Now that you have created a db container lets look inside it.
+            - Open a new terminal
+                + ` docker ps `
+                (you should see a couple containers listed, one of them should have the name db with a container id similar to <6d3nna456...> this will change with every container you spin up)
+                + ` docker exec -it <First 2-4 digits in the container ID> bash `
+                + ` psql -U postgres `
+                + ` \l `
+                (This should produce a chart of all the database under your current container)
+                + ` CREATE DATABASE <Database name that you have come up with in the previous steps matching this name is important> ; `
+            You have now created your database.
+                - In your main terminal
+                    + Press L-ctrl + C 
+                    + ` docker-compose down `
+                    + ` docker-compose up --build `
+            Everything should be up and running as intended.
+
+        2. Delete all previous volumes so it creates your database upon starting your application
+            (Be warned this will delete any previous databases that you have build in your user-data directory, if you dont have anything personal that you have build and want to keep then avoid doing this step)
+            
+            - In your current terminal
+                + Press L-ctrl + C
+                + ` docker-compose down -v `
+                + ` docker-compose up --build `
+            Everything should be up and running as intended
+
+
+
+
+                    
 
 # The application should be up and running
 

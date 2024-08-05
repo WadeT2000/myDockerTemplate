@@ -68,6 +68,8 @@ Else move onto (The application should be up and running) below
 
 # Common Errors
 
+Do not go to a step base off of the error code. Read the error and the potential errors below and adjust accordingly.
+
 1. If you run into the issue of already having a container with this name follow directions below
             The container name "/db" is already in use by container "---------------------------------------". You have to remove (or rename) that container to be able to reuse that name.
 
@@ -79,10 +81,32 @@ Else move onto (The application should be up and running) below
                 - Press Lctrl+C
                 + ` docker container rm <Container Name> ` (Container Name should be the container that is being hosted on the same port)
                 (This should resolve your container issues)
+            If this fixes any and all erros proceed to (The application should be up and running) below
 
  2. Database that you've created not actually being created? follow below instructions
     
-    (db   | 2024-08-05 18:43:43.441 UTC [40] FATAL:  database "<Your database name>" does not exist)
+    api  | 
+    api  | > api@1.0.0 start
+    api  | > knex migrate:rollback && knex migrate:latest && knex seed:run && nodemon ./src/app.js
+    api  | 
+    api  | Using environment: development
+    db   | 2024-08-05 19:16:48.543 UTC [40] FATAL:  database "<Your Database name>" does not exist
+    api  | database "<Your Database name>" does not exist
+    api  | error: database "<Your Database name>" does not exist
+    api  |     at Parser.parseErrorMessage (/src/app/node_modules/pg-protocol/dist/parser.js:283:98)
+    api  |     at Parser.handlePacket (/src/app/node_modules/pg-protocol/dist/parser.js:122:29)
+    api  |     at Parser.parse (/src/app/node_modules/pg-protocol/dist/parser.js:35:38)
+    api  |     at Socket.<anonymous> (/src/app/node_modules/pg-protocol/dist/index.js:11:42)
+    api  |     at Socket.emit (node:events:520:28)
+    api  |     at addChunk (node:internal/streams/readable:559:12)
+    api  |     at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)
+    api  |     at Readable.push (node:internal/streams/readable:390:5)
+    api  |     at TCP.onStreamRead (node:internal/stream_base_commons:191:23)
+    ui   | 
+    ui   | > ui@0.1.0 start
+    ui   | > react-scripts start
+    ui   | 
+    api exited with code 1
     
     There are two main ways to go about this fix actions
 
@@ -94,6 +118,7 @@ Else move onto (The application should be up and running) below
                 + ` docker-compose down -v `
                 + ` docker-compose up --build `
             Everything should be up and running as intended
+            If this fixes any and all erros proceed to (The application should be up and running) below
 
         2. Manually create your database:
         - Now that you have created a db container lets look inside it.
@@ -111,6 +136,7 @@ Else move onto (The application should be up and running) below
                     + ` docker-compose down `
                     + ` docker-compose up --build `
             Everything should be up and running as intended.
+            If this fixes any and all erros proceed to (The application should be up and running) below
 
                     
 

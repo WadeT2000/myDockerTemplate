@@ -1,8 +1,8 @@
 # This is my Docker-Compose template
 
 - Under docker-compose.yaml change my_database to the name of the database you want to create
-    Line 9 - POSTGRES_DB=my_database
-    Line 27 - DB_CONNECTION_STRING=postgresql://postgres:docker@db:5432/my_database 
+    Line 10 - POSTGRES_DB=my_database
+    Line 35 - DB_CONNECTION_STRING=postgresql://postgres:docker@db:5432/my_database 
       
 - In ./api/.env change my_database to the name of the database you want to create as well.
       - DB_CONNECTION_STRING=postgresql://postgres:docker@db:5432/my_database

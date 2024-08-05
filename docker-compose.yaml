@@ -7,7 +7,7 @@ services:
     environment: 
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=docker
-      - POSTGRES_DB=my_database
+      - POSTGRES_DB=testing
     ports:
       - "5432:5432"
     healthcheck:
@@ -32,7 +32,7 @@ services:
         condition: service_healthy
     environment:
       - NODE_ENV=development
-      - DB_CONNECTION_STRING=postgresql://postgres:docker@db:5432/my_database
+      - DB_CONNECTION_STRING=postgresql://postgres:docker@db:5432/testing
     volumes:
       - type: bind
         source: ./api

@@ -13,8 +13,10 @@ app.get('/', (req, res) => {
     res.status(200).json('My API is up and running!')
 })
 
-app.get('/test', (req, res) => {
-    res.status(200).json("testing this endpoint")
+app.get('/testingtable', (req, res) => {
+    knex('first_table')
+    .select('*')
+    .then(data => res.status(200).json(data))
 })
 
 

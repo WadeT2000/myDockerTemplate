@@ -32,12 +32,60 @@ Before we start creating our front and backend lets check to make sure our datab
 
 Make your terminal as big as possible
 
+    You may not have an error code at all: 
+        Your terminal should look similar to below
+    
+api  | 
+api  | > api@1.0.0 start
+api  | > knex migrate:rollback && knex migrate:latest && knex seed:run && nodemon ./src/app.js
+api  | 
+api  | Using environment: development
+api  | Already at the base migration
+ui   | 
+ui   | > ui@0.1.0 start
+ui   | > react-scripts start
+ui   | 
+api  | Using environment: development
+api  | Batch 1 run: 1 migrations
+api  | Using environment: development
+api  | Ran 1 seed files
+api  | [nodemon] 3.1.4
+api  | [nodemon] to restart at any time, enter `rs`
+api  | [nodemon] watching path(s): *.*
+api  | [nodemon] watching extensions: js,mjs,cjs,json
+api  | [nodemon] starting `node ./src/app.js`
+api  | Express server listening on port 8080
+ui   | (node:25) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+ui   | (Use `node --trace-deprecation ...` to show where the warning was created)
+ui   | (node:25) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+ui   | Starting the development server...
+ui   | 
+ui   | Compiled successfully!
+ui   | 
+ui   | You can now view ui in the browser.
+ui   | 
+ui   |   Local:            http://localhost:3000
+ui   |   On Your Network:  http://172.18.0.4:3000
+ui   | 
+ui   | Note that the development build is not optimized.
+ui   | To create a production build, use npm run build.
+ui   | 
+ui   | webpack compiled successfully
+
+Move onto (The application should be up and running) below
+
+
+Else see below:
+
+
 Look for an error line and/or api exit line,
 
     api exited with code 1 or any other codes.
 
 above the error code it should display similar to below:
     (IF YOU HAVE ANY TO BEGIN WITH)
+
+    
 
 api  | 
 api  | > api@1.0.0 start
@@ -62,9 +110,7 @@ ui   | > react-scripts start
 ui   | 
 api exited with code 1
 
-If you have an error in your terminal see below for fixes.
-
-Else move onto (The application should be up and running) below
+If you have an error in your terminal see Common Errors below for fixes.
 
 # Common Errors
 
@@ -155,7 +201,10 @@ Do not go to a step base off of the error code. Read the error and the potential
 
 # Navigating docker-compose
 
-    Run ` docker-compose down `
+    In the teminal
+
+    - Press L-ctrl + C
+    - ` docker-compose down `
 
     From here you can build your Frontend(ui) and backend(api)
     Follow the Readme's for each directory to build your database and react-app

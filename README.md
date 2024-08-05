@@ -30,7 +30,39 @@
 
 Before we start creating our front and backend lets check to make sure our database hase been build properly.
 
-If you have an error in your terminal see below.
+Make your terminal as big as possible
+
+Look for an error line and/or api exit line,
+
+    api exited with code 1 or any other codes.
+
+above the error code it should display similar to below:
+    (IF YOU HAVE ANY TO BEGIN WITH)
+
+api  | 
+api  | > api@1.0.0 start
+api  | > knex migrate:rollback && knex migrate:latest && knex seed:run && nodemon ./src/app.js
+api  | 
+api  | Using environment: development
+db   | 2024-08-05 19:16:48.543 UTC [40] FATAL:  database "<Your Database name>" does not exist                           (Look at this error in particular)
+api  | database "<Your Database name>" does not exist
+api  | error: database "<Your Database name>" does not exist
+api  |     at Parser.parseErrorMessage (/src/app/node_modules/pg-protocol/dist/parser.js:283:98)
+api  |     at Parser.handlePacket (/src/app/node_modules/pg-protocol/dist/parser.js:122:29)
+api  |     at Parser.parse (/src/app/node_modules/pg-protocol/dist/parser.js:35:38)
+api  |     at Socket.<anonymous> (/src/app/node_modules/pg-protocol/dist/index.js:11:42)
+api  |     at Socket.emit (node:events:520:28)
+api  |     at addChunk (node:internal/streams/readable:559:12)
+api  |     at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)
+api  |     at Readable.push (node:internal/streams/readable:390:5)
+api  |     at TCP.onStreamRead (node:internal/stream_base_commons:191:23)
+ui   | 
+ui   | > ui@0.1.0 start
+ui   | > react-scripts start
+ui   | 
+api exited with code 1
+
+If you have an error in your terminal see below for fixes.
 
 # Common Errors
 
@@ -47,9 +79,21 @@ If you have an error in your terminal see below.
                 (This should resolve your container issues)
 
  2. Database that you've created not actually being created? follow below instructions
+    
     (db   | 2024-08-05 18:43:43.441 UTC [40] FATAL:  database "<Your database name>" does not exist)
+    
     There are two main ways to go about this fix actions
-        1. Manually create your database:
+
+        1. Delete all previous volumes so it creates your database upon starting your application
+            (Be warned this will delete any previous databases that you have build in your user-data directory, if you dont have anything personal that you have build and want to keep then avoid doing this step)
+            
+            - In your current terminal
+                + Press L-ctrl + C
+                + ` docker-compose down -v `
+                + ` docker-compose up --build `
+            Everything should be up and running as intended
+
+        2. Manually create your database:
         - Now that you have created a db container lets look inside it.
             - Open a new terminal
                 + ` docker ps `
@@ -66,14 +110,7 @@ If you have an error in your terminal see below.
                     + ` docker-compose up --build `
             Everything should be up and running as intended.
 
-        2. Delete all previous volumes so it creates your database upon starting your application
-            (Be warned this will delete any previous databases that you have build in your user-data directory, if you dont have anything personal that you have build and want to keep then avoid doing this step)
-            
-            - In your current terminal
-                + Press L-ctrl + C
-                + ` docker-compose down -v `
-                + ` docker-compose up --build `
-            Everything should be up and running as intended
+        
 
 
 
@@ -92,21 +129,16 @@ If you have an error in your terminal see below.
                 - [{"id":1,"name":"rowValue1"},{"id":2,"name":"rowValue2"},{"id":3,"name":"rowValue3"}]
 
 
-    To close down the application in VS Code terminal
-        1. ` docker-compose down `
-
-
-
--Please read each ReadMe under each endpoint for additional information on making changes to the front/back end of your application.
-
-
 
 # Navigating docker-compose
+
+    Run ` docker-compose down `
 
     From here you can build your Frontend(ui) and backend(api)
     Follow the Readme's for each directory to build your database and react-app
 
 Once you have completed your database run ` docker-compose up --build `
-You can work on your app.js to make you endpoints and everything under ui/src to make your front and and it will show your changes at each localhost:<port>.
+You can work on your backend endpoints in api/src/app.js and it will show your changes at each localhost:8080.
+You can work on your frontend ui/src and it will show your changes at each localhost:3000.
 
     (Keep in mind and changes to the actual database you will need to ` docker-compose down ` and ` docker-compose up --build ` to see these new changes)
